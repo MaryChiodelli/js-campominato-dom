@@ -3,16 +3,16 @@ const buttonEl = document.querySelector('.main-header button');
 const gridEl = document.querySelector('main .grid');
 const mainEl = document.querySelector('main');
 
+let gridSize;
+let numOfCells;
 const bombList = [];
 let score = 0;
-let gridSize = 9;
-const numOfCells = gridSize ** 2;
 let message;
 
 buttonEl.addEventListener('click', function () {
     gridEl.innerHTML = '';
     const levelMode = getLevelMode(selectEl);
-    // let gridSize = 9;
+    gridSize = 9;
     
     if (levelMode === 'easy') {
         gridSize = 10;
@@ -20,7 +20,7 @@ buttonEl.addEventListener('click', function () {
         gridSize = 7;
     }
     
-    // const numOfCells = gridSize ** 2;
+    numOfCells = gridSize ** 2;
     // generare griglia 10 x 10
     for (let i = 0; i < numOfCells; i++) {
         const square = createSquareEl(gridSize);
@@ -54,14 +54,15 @@ function clickHandler() {
     if (bombList.includes(num)) {
         this.classList.add('danger');
         message = `Mi dispiace, hai perso, il tuo punteggio è: ${score}`;
+        mainEl.innerHTML += `<p>${message}</p>`;
     } else {
         this.classList.add('safe');
         score++;
         if (score === numOfCells - 16) {
             message = `Congratulazioni, hai vinto, il tuo punteggio è: ${score}`;
+            mainEl.innerHTML += `<p>${message}</p>`;
         }
     }
-    mainEl.innerHTML += `<p>${message}</p>`;
 }
 
 function bombGenerator(max) {
