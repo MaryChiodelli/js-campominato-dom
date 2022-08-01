@@ -1,8 +1,11 @@
 const selectEl = document.querySelector('.main-header select');
 const buttonEl = document.querySelector('.main-header button');
 const gridEl = document.querySelector('main .grid');
+const mainEl = document.querySelector('main');
 
 const bombList = [];
+let score = 0;
+let message;
 
 buttonEl.addEventListener('click', function () {
     gridEl.innerHTML = ''
@@ -31,6 +34,11 @@ buttonEl.addEventListener('click', function () {
     }
 
     bombGenerator(numOfCells);
+
+    if (score === numOfCells - 16) {
+        message = `Congratulazioni, hai vinto, il tuo punteggio è: ${score}`;
+        mainEl.innerHTML += `<p>${message}</p>`;
+    }
 });
 
 function getLevelMode(input) {
@@ -54,8 +62,11 @@ function clickHandler() {
     const num = parseInt(this.innerHTML);
     if (bombList.includes(num)) {
         this.classList.add('danger');
+        message = `Mi dispiace, hai persp, il tuo punteggio è: ${score}`;
+        mainEl.innerHTML += `<p>${message}</p>`;
     } else {
         this.classList.add('safe');
+        score++;
     }
 }
 
