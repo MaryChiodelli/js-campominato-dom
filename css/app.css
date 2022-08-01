@@ -58,6 +58,12 @@ main {
     flex-basis: calc((100% / 7) * 1);
 }
 
-.square.active {
-    background-color: azure;
+.square.danger {
+    background-color: red;
+    color: white;
+}
+
+.square.safe {
+    background-color: blue;
+    color: white;
 }

@@ -51,9 +51,12 @@ function createSquareEl() {
 }
 
 function clickHandler() {
-    const square = this;
-    square.classList.add('active');
-    console.log(square.innerHTML);
+    const num = parseInt(this.innerHTML);
+    if (bombList.includes(num)) {
+        this.classList.add('danger');
+    } else {
+        this.classList.add('safe');
+    }
 }
 
 function bombGenerator(max) {
@@ -63,7 +66,7 @@ function bombGenerator(max) {
             bombList.push(num);
         }
     }
-    // console.log(max, bombList);
+    console.log(max, bombList);
 }
 
 function getRandomNumber(min, max) {
