@@ -21,15 +21,8 @@ buttonEl.addEventListener('click', function () {
     const numOfCells = gridSize ** 2;
     // generare griglia 10 x 10
     for (let i = 0; i < numOfCells; i++) {
-        const square = createSquareEl();
+        const square = createSquareEl(gridSize);
         square.innerHTML = i + 1;
-        if (levelMode === 'easy') {
-            square.classList.add('cell-10');
-        } else if (levelMode === 'hard') {
-            square.classList.add('cell-7');
-        } else {
-            square.classList.add('cell-9');
-        }
         gridEl.append(square);
     }
 
@@ -51,9 +44,10 @@ function getLevelMode(input) {
     return 'medium';
 }
 
-function createSquareEl() {
+function createSquareEl(size) {
     const square = document.createElement('div');
     square.classList.add('square');
+    square.style.flexBasis = `${100 / size}%`;
     square.addEventListener('click', clickHandler);
     return square;
 }
