@@ -1,9 +1,11 @@
 const selectEl = document.querySelector('.main-header select');
 const buttonEl = document.querySelector('.main-header button');
 const gridEl = document.querySelector('main .grid');
-gridEl.innerHTML = ''
+
+const bombList = [];
 
 buttonEl.addEventListener('click', function () {
+    gridEl.innerHTML = ''
     const levelMode = getLevelMode(selectEl);
     let gridSize = 9;
 
@@ -27,6 +29,8 @@ buttonEl.addEventListener('click', function () {
         }
         gridEl.append(square);
     }
+
+    bombGenerator(numOfCells);
 });
 
 function getLevelMode(input) {
@@ -50,4 +54,18 @@ function clickHandler() {
     const square = this;
     square.classList.add('active');
     console.log(square.innerHTML);
+}
+
+function bombGenerator(max) {
+    while (bombList.length < 16) {
+        const num = getRandomNumber(1, max);
+        if (!bombList.includes(num)) {
+            bombList.push(num);
+        }
+    }
+    // console.log(max, bombList);
+}
+
+function getRandomNumber(min, max) {
+    return Math.floor(Math.random() * (max - min + 1) + min);
 }
